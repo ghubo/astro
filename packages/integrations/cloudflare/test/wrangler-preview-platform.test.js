@@ -14,6 +14,9 @@ describe('WranglerPreviewPlatform', () => {
 		await astroCli(fileURLToPath(root), 'build');
 
 		wrangler = wranglerCli(fileURLToPath(root));
+		wrangler.catch((err) => {
+			console.error('Wrangler error:', err);
+		});
 		await /** @type {Promise<void>} */(new Promise((resolve) => {
 			wrangler.stdout.on('data', (data) => {
 				console.log('[stdout]', data.toString());
